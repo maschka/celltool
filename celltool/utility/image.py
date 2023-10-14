@@ -8,7 +8,7 @@
 """Tools to read and write numpy arrays from and to image files.
 """
 
-import freeimage
+from PIL import Image
 import numpy
 from . import warn_tools
 
@@ -18,14 +18,19 @@ def read_grayscale_array_from_image_file(filename, warn = True):
 
     If 'warn' is True, issue a warning when arrays are converted from color to grayscale.
     """
-    image_array = freeimage.read(filename)
+    image_array = numpy.array(Image.open(filename)).swapaxes(0,1)
     if len(image_array.shape) == 3:
         image_array = make_grayscale_array(image_array)
         if warn:
             warn_tools.warn('Image %s converted from RGB to grayscale: intensity values have been scaled and combined.'%filename)
     return image_array
 
-write_array_as_image_file = freeimage.write
+
+def write_array_as_image_file(array, filename):
+    out = array.swapaxes(0,1)
+    im = Image.fromarray(out)
+    im.save(filename)
+
 
 def make_grayscale_array(array):
     """Giiven an array of shape (x,y,3) where the last dimension indexes the

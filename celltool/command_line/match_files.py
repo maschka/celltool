@@ -5,7 +5,8 @@
 # it under the terms of version 2 of the GNU General Public License as
 # published by the Free Software Foundation.
 import re
-import freeimage
+import PIL
+from PIL import Image
 
 from celltool.contour import contour_class
 from celltool.utility import terminal_tools
@@ -69,9 +70,9 @@ def _get_contours_and_images(filenames, show_progress = True):
         if not filename.exists():
             raise ValueError('File "%s" does not exist.'%filename)
         try:
-            freeimage.read_metadata(filename)
+            Image.open(filename)
             image_names.append(filename)
-        except ValueError as e:
+        except PIL.UnidentifiedImageError as e:
             # print e
             # print Image.ID
             try:
