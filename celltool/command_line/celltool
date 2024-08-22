@@ -12,6 +12,10 @@
 """
 import sys
 import os
+sys.path.remove('/opt/homebrew/lib/python3.9/site-packages')
+sys.path.append('/Users/mashka/Documents/celltool')
+sys.path.append('/opt/homebrew/lib/python3.9/site-packages')
 from celltool.command_line import celltool_driver
+
 
 celltool_driver.main(os.path.basename(sys.argv[0]), sys.argv[1:])
