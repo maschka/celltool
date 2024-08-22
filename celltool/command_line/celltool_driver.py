@@ -26,7 +26,6 @@ parser.add_option('-h', '--help', action='store_true',
     help='print help text for all commands and exit')
 
 def main(name, arguments):
-    print('hiiiii')
     parser.prog = name
     options, args = parser.parse_args(arguments)
     if options.help:
