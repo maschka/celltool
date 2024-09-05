@@ -11,5 +11,5 @@ conda create -y -n py39 python=3.9
 conda activate py39
 pip install matplotlib numpy scipy imageio
 pip install scikit-image
-pip install git+https://github.com/psuriana/celltool
+pip install git+https://github.com/maschka/celltool
 ```
